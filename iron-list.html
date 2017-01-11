@@ -350,6 +350,23 @@ will only render 20.
       },
 
       /**
+       * When true, any grid list is centered in the viewport horizontally.
+       *
+       * ```html
+       * <iron-list grid centerGrid>
+       *   <template>
+       *      <div style="width: 100px; height: 100px;"> 100x100 </div>
+       *   </template>
+       * </iron-list>
+       * ```
+       */
+      centerGrid: {
+        type: Boolean.
+        value: true,
+        reflectToAttribute: true
+      },
+
+      /**
        * When true, tapping a row will select the item, placing its data model
        * in the set of selected items retrievable via the selection property.
        *
@@ -1313,7 +1330,7 @@ will only render 20.
 
       if (this.grid) {
         var totalItemWidth = this._itemsPerRow * this._itemWidth;
-        var rowOffset = (this._viewportWidth - totalItemWidth) / 2;
+        var rowOffset = this.centerGrid? (this._viewportWidth - totalItemWidth) / 2 : 0;
 
         this._iterateItems(function(pidx, vidx) {
           var modulus = vidx % this._itemsPerRow;
